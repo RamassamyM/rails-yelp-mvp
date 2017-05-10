@@ -5,6 +5,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @review = Review.new
   end
 
   def new
@@ -20,10 +21,19 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def search
+    @restaurants = Restaurant.where("name LIKE ?", "%#{search_params[:query]}%")
+    @query = search_params
+  end
+
   private
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:id])
+  end
+
+  def search_params
+    params.permit(:query)
   end
 
   def restaurant_params

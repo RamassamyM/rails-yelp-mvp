@@ -1,24 +1,35 @@
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8 offset-sm-3">
+<div class="wrapper-show">
+  <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://lorempixel.com/1000/200/food');">
+  </div>
 
-      <h2><%= @restaurant.name %></h2>
-      <p><%= @restaurant.address %></p>
-      <p>
-        <%= @restaurant.phone_number%>
-      </p>
-      <p><%= @restaurant.category %></p>
-      <%= link_to restaurants_path do %>
-        <p class="emoji">⬅️</p>
-      <% end %>
-      <h4>Reviews </h4>
-      <%= link_to 'Add a review', new_restaurant_review_path(@restaurant), class: "btn btn-primary"%>
-      <br>
-      <% @restaurant.reviews.each do |review| %>
-         <p><%= review.content %> <%= '⭐' * review.rating%></p>
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="header">
+            <h2><%= @restaurant.name %>
+              <span  class="label label-default"><%= @restaurant.category %></span>
+            </h2>
+            <%= link_to 'Back', restaurants_path, class: "btn btn-primary"%>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-8 offset-sm-3">
+        <p>Address : <%= @restaurant.address %></p>
+        <p>Phone number : <%= @restaurant.phone_number%></p>
+        <p>Category : <%= @restaurant.category %></p>
+        <br>
+        <h3>Reviews </h3>
+        <% @restaurant.reviews.each do |review| %>
+           <% if review.persisted? %>
+           <p><%= review.content %> <%= '⭐' * review.rating%></p>
+           <% end %>
         <% end %>
-
+        <br>
+        <h4>Add your review </h4>
+        <%= render 'reviews/form' %>
+      </div>
     </div>
   </div>
 </div>
