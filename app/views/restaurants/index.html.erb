@@ -1,0 +1,17 @@
+<div class="wrapper ">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-3">
+        <h2>Restaurants</h2>
+        <%= link_to 'Add', new_restaurant_path, class: "btn btn-primary"%>
+        <% @restaurants.each do |restaurant| %>
+          <p>
+          <%= link_to restaurant do %>
+            <%= restaurant.name %>
+          <% end %>
+             : <%= restaurant.address%> (phone : <%= restaurant.phone_number %> ) - <%= restaurant.category%></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
